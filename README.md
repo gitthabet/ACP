@@ -8,8 +8,8 @@ Ceci étant dit, les autres objectifs sont aussi d’obtenir :<br>
 
 
 ###Concernant les données:<br>
-> l’ensemble des données sont numériques (pour certaines catégorielles)<br>
-> elles ont été sélectionnées à partir d’un ensemble de données plus grand<br><br>
+- l’ensemble des données sont numériques (pour certaines catégorielles)<br>
+- elles ont été sélectionnées à partir d’un ensemble de données plus grand<br><br>
 ###Les features incluent:<br>
 NREF (le n° de référence du prêt <==> identifiant),<br>
 MNT_PRET (le montant du prêt)<br>
