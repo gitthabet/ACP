@@ -1,5 +1,4 @@
-# ACP
-ACP &amp; Kmeans
+# ACP & Kmeans
 
 ###L’objectif est d’effectuer une PCA puis un K-means.
 Ceci étant dit, les autres objectifs sont aussi d’obtenir :
@@ -12,10 +11,11 @@ Ceci étant dit, les autres objectifs sont aussi d’obtenir :
 
 ###Concernant les données:
 > l’ensemble des données sont numériques (pour certaines catégorielles)
+
 > elles ont été sélectionnées à partir d’un ensemble de données plus grand
 
 ###Les features incluent:
-NREF (le n° de référence du prêt <==> identifiant),
+NREF (le n° de référence du prêt <==> identifiant),<br>
 MNT_PRET (le montant du prêt)
 ENCOURS_PRET (l’encours du prêt)
 NBRE_ECHEANCE (le nombre d’échéance)
