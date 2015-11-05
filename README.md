@@ -23,4 +23,4 @@ Ceci étant dit, les autres objectifs sont aussi d’obtenir :<br>
 - flag_pret       (le type de prêt)<br>
 - cd_agenteco     (le code agent économique)<br>
 - cd_agence       (le code agence)<br>
-civil (la civilité de l’emprunteur)<br>
+- civil (la civilité de l’emprunteur)<br>
