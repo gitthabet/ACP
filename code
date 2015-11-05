@@ -1,1 +1,389 @@
 
+
+# coding: utf-8
+
+# #####@Thabet CHELLIGUE
+# # Analyse ACP
+
+# ###Load data
+
+# In[25]:
+
+get_ipython().magic(u'matplotlib inline')
+import pandas, numpy
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+my_data = pandas.read_csv("/Users/thabetbgd/Downloads/data.csv",sep=";",encoding="utf8")
+print(my_data.shape)
+my_data.head()
+
+
+# ###Descriptive Statistics
+
+# In[26]:
+
+statistics=my_data.describe().T
+numpy.round(statistics,decimals=0)
+
+
+# In[62]:
+
+pca = PCA(n_components=2)
+print(pca.fit(my_data))
+print pca.explained_variance_ratio_
+print pca.components_[0]
+print pca.components_[1]
+
+
+# In[65]:
+
+comp0=pandas.DataFrame(my_data.columns,columns=['variables'])
+print len(comp0)
+comp1=pandas.DataFrame(pca.components_[0],columns=['components_1'])*100
+comp2=pandas.DataFrame(pca.components_[1],columns=['components_2'])*100
+comp1=numpy.round(comp1, decimals=0)
+comp2=numpy.round(comp2, decimals=0)
+comp=pandas.concat([comp0,comp1, comp2], axis=1)
+print comp
+
+
+# In[66]:
+
+plt.bar(numpy.arange(len(pca.explained_variance_ratio_))+0.5, pca.explained_variance_ratio_)
+plt.title("Variance expliquee")
+
+
+# In[36]:
+
+X_reduced = pca.transform(my_data)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:, 0], X_reduced[:, 1])
+for label, x, y in zip(my_data.index, X_reduced[:, 0], X_reduced[:, 1]):
+    plt.annotate(
+        label,
+        xy = (x, y), xytext = (-20, 20),
+        textcoords = 'offset points', ha = 'right', va = 'bottom',
+        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'green', alpha = 0.5),
+        arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+
+
+# In[41]:
+
+X_reduced.shape
+#X_reduced
+
+
+# In[ ]:
+
+get_ipython().magic(u'matplotlib inline')
+from scipy import stats
+#use seaborn plotting defaults
+#If this causes an error , you can comment it out.
+import seaborn as sns
+sns.set
+
+
+# In[44]:
+
+from sklearn.cluster import KMeans
+est=KMeans(3) #4 clusters
+est.fit(X_reduced)
+y_kmeans=est.predict(X_reduced)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:,0],X_reduced[:,1],c=y_kmeans,s=50,cmap='rainbow')
+
+
+# In[46]:
+
+import matplotlib.mlab as mlab
+mpca=mlab.PCA(my_data)
+print mpca.Wt
+
+
+# In[48]:
+
+n_data = (my_data - my_data.mean(axis=0)) / my_data.std(axis=0)
+
+
+# In[49]:
+
+evals, evecs = numpy.linalg.eig(numpy.cov(n_data.T))
+
+
+# In[50]:
+
+evecs = evecs[:, numpy.argsort(evals)[::-1]].T
+evecs
+
+
+# In[53]:
+
+pca = PCA(n_components=2)
+print(pca.fit(n_data))
+pca.explained_variance_ratio_
+
+
+# In[54]:
+
+plt.bar(numpy.arange(len(pca.explained_variance_ratio_))+0.5, pca.explained_variance_ratio_)
+plt.title("Variance expliquee")
+
+
+# In[55]:
+
+X_reduced = pca.transform(n_data)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:, 0], X_reduced[:, 1])
+for label, x, y in zip(n_data.index, X_reduced[:, 0], X_reduced[:, 1]):
+    plt.annotate(
+        label,
+        xy = (x, y), xytext = (-20, 20),
+        textcoords = 'offset points', ha = 'right', va = 'bottom',
+        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'green', alpha = 0.5),
+        arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+
+
+# In[56]:
+
+comp0=pandas.DataFrame(n_data.columns,columns=['variables'])
+print len(comp0)
+comp1=pandas.DataFrame(pca.components_[0],columns=['components_1'])*100
+comp2=pandas.DataFrame(pca.components_[1],columns=['components_2'])*100
+comp1=numpy.round(comp1, decimals=0)
+comp2=numpy.round(comp2, decimals=0)
+comp=pandas.concat([comp0,comp1, comp2], axis=1)
+print comp
+
+
+# In[59]:
+
+get_ipython().magic(u'matplotlib inline')
+from scipy import stats
+#use seaborn plotting defaults
+#If this causes an error , you can comment it out.
+import seaborn as sns
+sns.set
+from sklearn.cluster import KMeans
+est=KMeans(3) #4 clusters
+est.fit(X_reduced)
+y_kmeans=est.predict(X_reduced)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:,0],X_reduced[:,1],c=y_kmeans,s=50,cmap='rainbow')
+
+
+# In[229]:
+
+
+my_data[['MNT_PRET']]=my_data[['MNT_PRET']]>50000000
+my_data[['ENCOURS_PRET']]=my_data[['ENCOURS_PRET']]>0
+my_data[['NBRE_ECHEANCE']]=my_data[['NBRE_ECHEANCE']]>10
+my_data[['TOT_ENCOURS_DEPOTS']]=my_data[['TOT_ENCOURS_DEPOTS']]>999
+my_data[['TOT_ENCOURS_PRETS']]=my_data[['TOT_ENCOURS_PRETS']]>60000000
+my_data.head()
+
+
+# In[247]:
+
+data.shape,pca.components_[0],pca.components_[1]
+
+
+# In[240]:
+
+plt.bar(numpy.arange(len(pca.explained_variance_ratio_))+0.5, pca.explained_variance_ratio_)
+plt.title("Variance expliquee")
+
+
+# In[241]:
+
+X_reduced = pca.transform(data)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:, 0], X_reduced[:, 1])
+for label, x, y in zip(data.index, X_reduced[:, 0], X_reduced[:, 1]):
+    plt.annotate(
+        label,
+        xy = (x, y), xytext = (-20, 20),
+        textcoords = 'offset points', ha = 'right', va = 'bottom',
+        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'green', alpha = 0.5),
+        arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+
+
+# In[242]:
+
+X_reduced.shape
+
+
+# In[134]:
+
+get_ipython().magic(u'matplotlib inline')
+from scipy import stats
+#use seaborn plotting defaults
+#If this causes an error , you can comment it out.
+import seaborn as sns
+sns.set
+
+
+# In[68]:
+
+get_ipython().magic(u'matplotlib inline')
+from scipy import stats
+#use seaborn plotting defaults
+#If this causes an error , you can comment it out.
+import seaborn as sns
+sns.set
+from sklearn.cluster import KMeans
+est=KMeans(3) #4 clusters
+est.fit(X_reduced)
+y_kmeans=est.predict(X_reduced)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:,0],X_reduced[:,1],c=y_kmeans,s=50,cmap='rainbow')
+
+
+# In[136]:
+
+import matplotlib.mlab as mlab
+mpca=mlab.PCA(data)
+print mpca.Wt
+
+
+# In[138]:
+
+n_data = (data - data.mean(axis=0)) / data.std(axis=0)
+
+
+# In[139]:
+
+n_data = (data - data.mean(axis=0)) / data.std(axis=0)
+evals, evecs = numpy.linalg.eig(numpy.cov(n_data.T))
+evecs = evecs[:, numpy.argsort(evals)[::-1]].T
+evecs
+
+
+# In[140]:
+
+evecs = evecs[:, numpy.argsort(evals)[::-1]].T
+
+
+# In[141]:
+
+evecs
+
+
+# In[142]:
+
+pca = PCA(n_components=4)
+print(pca.fit(n_data))
+pca.explained_variance_ratio_
+
+
+# In[143]:
+
+plt.bar(numpy.arange(len(pca.explained_variance_ratio_))+0.5, pca.explained_variance_ratio_)
+plt.title("Variance expliquee")
+
+
+# In[144]:
+
+X_reduced = pca.transform(n_data)
+plt.figure(figsize=(18,10))
+plt.scatter(X_reduced[:, 0], X_reduced[:, 1])
+for label, x, y in zip(data.index, X_reduced[:, 0], X_reduced[:, 1]):
+    plt.annotate(
+        label,
+        xy = (x, y), xytext = (-20, 20),
+        textcoords = 'offset points', ha = 'right', va = 'bottom',
+        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'green', alpha = 0.5),
+        arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+
+
+# In[145]:
+
+get_ipython().magic(u'matplotlib inline')
+from scipy import stats
+#use seaborn plotting defaults
+#If this causes an error , you can comment it out.
+import seaborn as sns
+sns.set
+
+
+# In[67]:
+
+from sklearn.cluster import KMeans
+est=KMeans(3) #4 clusters
+est.fit(X_reduced)
+y_kmeans=est.predict(X_reduced)
+plt.figure(figsize=(18,10))
+
+plt.scatter(X_reduced[:,0],X_reduced[:,1],c=y_kmeans,s=50,cmap='rainbow')
+
+
+# In[147]:
+
+n_data.head()
+
+
+# In[148]:
+
+n_data.head()XX=n_data
+from sklearn.preprocessing import StandardScaler
+X_std = StandardScaler().fit_transform(XX)
+import numpy as np
+mean_vec = np.mean(X_std, axis=0)
+cov_mat = (X_std - mean_vec).T.dot((X_std - mean_vec)) / (X_std.shape[0]-1)
+print('Covariance matrix \n%s' %cov_mat)
+
+
+# In[149]:
+
+df = pandas.DataFrame(cov_mat) #, columns=['R', 'G', 'B']
+
+
+# In[150]:
+
+df
+
+
+# In[151]:
+
+import numpy
+column_labels = list('ABCDEFGHI')
+row_labels = list('ABCDEFGHI')
+
+
+# In[153]:
+
+# Plot it out
+fig, ax = plt.subplots()
+heatmap = ax.pcolor(df, cmap=plt.cm.Blues, alpha=0.8)
+
+# Format
+fig = plt.gcf()
+fig.set_size_inches(12, 12)
+# turn off the frame
+ax.set_frame_on(False)
+
+# put the major ticks at the middle of each cell
+ax.set_yticks(np.arange(df.shape[0]) + 0.5, minor=False)
+ax.set_xticks(np.arange(df.shape[1]) + 0.5, minor=False)
+# want a more natural, table-like display
+ax.invert_yaxis()
+ax.xaxis.tick_top()
+
+# label source:https://en.wikipedia.org/wiki/Basketball_statistics
+labels = list(n_data.columns.values)
+
+# note I could have used nba_sort.columns but made "labels" instead
+ax.set_xticklabels(labels, minor=False)
+ax.set_yticklabels(df.index, minor=False)
+
+# rotate the
+plt.xticks(rotation=90)
+
+ax.grid(False)
+#from matplotlib import pyplot as plt
+#heatmap = plt.pcolor(df, cmap=plt.cm.Blues)
+
+
+# In[154]:
+
+df
+
