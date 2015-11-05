@@ -1,10 +1,10 @@
 # ACP & Kmeans
 
-###L’objectif est d’effectuer une PCA puis un K-means.<br><br>
+###L’objectif est d’effectuer une PCA puis un K-means.<br>
 Ceci étant dit, les autres objectifs sont aussi d’obtenir :<br>
-> une représentation des données permettant de comprendre les premières dimensions de la PCA (càd leur traduction/interprétation)<br>
-> les raisons associées à l’utilisation du Kmeans après cette PCA spécifique (càd pourquoi faire un Kmeans au vu des résultats de la PCA)<br>
-> les explications des étapes du Kmeans permettant d’aboutir au regroupement optimal.
+- une représentation des données permettant de comprendre les premières dimensions de la PCA (càd leur traduction/interprétation)<br>
+- les raisons associées à l’utilisation du Kmeans après cette PCA spécifique (càd pourquoi faire un Kmeans au vu des résultats de la PCA)<br>
+- les explications des étapes du Kmeans permettant d’aboutir au regroupement optimal.
 
 
 ###Concernant les données:<br>
